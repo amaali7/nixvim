@@ -1,73 +1,107 @@
-{ helper, ... }:
-{
-  plugins.none-ls = {
-    enable = true;
-    enableLspFormat = true;
-    sources = {
-      diagnostics = {
-        deadnix.enable = true;
+{ helpers, ... }: {
+  plugins = {
+    luasnip.enable = false;
+
+    cmp = {
+      enable = false;
+
+      cmdline =
+        let
+          search = {
+            mapping = helpers.mkRaw # lua
+              "cmp.mapping.preset.cmdline()";
+            sources = [{ name = "buffer"; }];
+          };
+        in
+        {
+          "/" = search;
+          "?" = search;
+          ":" = {
+            mapping = helpers.mkRaw # lua
+              "cmp.mapping.preset.cmdline()";
+            sources = [{ name = "cmdline"; }];
+          };
+        };
+
+      settings = {
+        experimental = { ghost_text = true; };
+
+        mapping = {
+          "<C-Space>" = "cmp.mapping.complete()";
+          "<C-f>" = "cmp.mapping.scroll_docs(4)";
+          "<C-b>" = "cmp.mapping.scroll_docs(-4)";
+          "<C-e>" = "cmp.mapping.abort()";
+          "<CR>" = helpers.mkRaw # lua
+            ''
+              							cmp.mapping({
+              								i = function(fallback)
+              									if cmp.visible() and cmp.get_active_entry() then
+              										cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+              									else
+              										fallback()
+              									end
+              								end,
+              								s = cmp.mapping.confirm({ select = true }),
+              								c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+              							})
+              						'';
+          "<Tab>" = helpers.mkRaw # lua
+            ''
+              						cmp.mapping(function(fallback)
+              							if cmp.visible() then
+                            		cmp.select_next_item()
+                            	elseif luasnip.locally_jumpable(1) then
+                            		luasnip.jump(1)
+                            	else
+                            		fallback()
+                            	end
+                            end, { "i", "s" })
+            '';
+          "<S-Tab>" = helpers.mkRaw # lua
+            ''
+              cmp.mapping(function(fallback)
+              	if cmp.visible() then
+              		cmp.select_prev_item()
+              	elseif luasnip.locally_jumpable(-1) then
+              		luasnip.jump(-1)
+              	else
+              		fallback()
+              	end
+              end, { "i", "s" })
+            '';
+        };
+
+        snippet = {
+          expand =
+            ''function(args) require("luasnip").lsp_expand(args.body) end'';
+        };
+
+        sources = [
+          {
+            name = "luasnip";
+            groupIndex = 1;
+            priority = 5;
+          }
+          {
+            name = "nvim_lsp";
+            groupIndex = 1;
+            priority = 3;
+          }
+          { name = "omni"; }
+          { name = "path"; }
+          { name = "cmdline"; }
+          { name = "buffer"; }
+          { name = "dictionary"; }
+        ];
       };
     };
-    on_attach = helper.mkRaw ''
-                  function(client, bufnr)
-           local async_formatting = function(bufnr)
-             bufnr = bufnr or vim.api.nvim_get_current_buf()
 
-             vim.lsp.buf_request(
-                 bufnr,
-                 "textDocument/formatting",
-                 vim.lsp.util.make_formatting_params({}),
-                 function(err, res, ctx)
-                     if err then
-                         local err_msg = type(err) == "string" and err or err.message
-                         -- you can modify the log message / level (or ignore it completely)
-                         vim.notify("formatting: " .. err_msg, vim.log.levels.WARN)
-                         return
-                     end
-
-                     -- don't apply results if buffer is unloaded or has been modified
-                     if not vim.api.nvim_buf_is_loaded(bufnr) or vim.api.nvim_buf_get_option(bufnr, "modified") then
-                         return
-                     end
-
-                     if res then
-                         local client = vim.lsp.get_client_by_id(ctx.client_id)
-                         vim.lsp.util.apply_text_edits(res, bufnr, client and client.offset_encoding or "utf-16")
-                         vim.api.nvim_buf_call(bufnr, function()
-                             vim.cmd("silent noautocmd update")
-                         end)
-                     end
-                 end
-             )
-         end
-         local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-      		 local lsp_formatting = function(bufnr)
-             vim.lsp.buf.format({
-                 filter = function(client)
-                     -- apply whatever logic you want (in this example, we'll only use null-ls)
-                     return client.name == "null-ls"
-                 end,
-                 bufnr = bufnr,
-             })
-         end
-
-                  function(client, bufnr)
-                      if client.supports_method("textDocument/formatting") then
-                          vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-                          vim.api.nvim_create_autocmd("BufWritePost", {
-                              group = augroup,
-                              buffer = bufnr,
-                              callback = function()
-                                  async_formatting(bufnr)
-                                  lsp_formatting(bufnr)
-                              end,
-                          })
-                      end
-                  end,
-              })
-      				 end
-
-            		'';
+    cmp-cmdline.enable = true;
+    cmp-dictionary.enable = true;
+    cmp-fuzzy-path.enable = true;
+    cmp-fuzzy-buffer.enable = true;
+    cmp-nvim-lsp.enable = true;
+    cmp_luasnip.enable = true;
+    friendly-snippets.enable = true;
   };
 }
