@@ -95,7 +95,7 @@ in {
     };
 
     servers = {
-      astro.enable = true;
+			# astro.enable = true;
       # clangd.enable = true;
       # cmake.enable = true;
       cssls.enable = true;
