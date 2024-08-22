@@ -1,9 +1,9 @@
 { helpers, ... }: {
   plugins = {
-    luasnip.enable = true;
+    luasnip.enable = false;
 
     cmp = {
-      enable = true;
+      enable = false;
 
       cmdline = let
         search = {
