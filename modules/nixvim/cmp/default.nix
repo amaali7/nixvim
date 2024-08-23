@@ -26,11 +26,12 @@
       settings = {
         experimental = { ghost_text = true; };
 
-				formatting = {fields = ["kind" "abbr" "menu"];
-					#	format = ''
+        formatting = {
+          fields = [ "kind" "abbr" "menu" ];
+          #	format = ''
 
-					#		'';
-				};
+          #		'';
+        };
 
         mapping = {
           "<C-Space>" = "cmp.mapping.complete()";
@@ -61,7 +62,7 @@
           }
           { name = "omni"; }
           { name = "path"; }
-          # { name = "cmdline"; }
+          { name = "cmdline"; }
           { name = "buffer"; }
           { name = "dictionary"; }
         ];
