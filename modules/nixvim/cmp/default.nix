@@ -27,9 +27,9 @@
         experimental = { ghost_text = true; };
 
 				formatting = {fields = ["kind" "abbr" "menu"];
-				format = ''
+					#	format = ''
 
-					'';};
+					#		'';};
 
         mapping = {
           "<C-Space>" = "cmp.mapping.complete()";
