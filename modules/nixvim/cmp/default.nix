@@ -1,27 +1,27 @@
 { helpers, ... }: {
   plugins = {
-    luasnip.enable = false;
+    luasnip.enable = true;
 
     cmp = {
-      enable = false;
+      enable = true;
 
-			# cmdline =
-     	#   let
-     	#     search = {
-     	#       mapping = helpers.mkRaw # lua
-     	#         "cmp.mapping.preset.cmdline()";
-     	#       sources = [{ name = "buffer"; }];
-     	#     };
-     	#   in
-     	#   {
-     	#     "/" = search;
-     	#     "?" = search;
-     	#     ":" = {
-     	#       mapping = helpers.mkRaw # lua
-     	#         "cmp.mapping.preset.cmdline()";
-     	#       sources = [{ name = "cmdline"; }];
-     	#     };
-     	#   };
+      # cmdline =
+      #   let
+      #     search = {
+      #       mapping = helpers.mkRaw # lua
+      #         "cmp.mapping.preset.cmdline()";
+      #       sources = [{ name = "buffer"; }];
+      #     };
+      #   in
+      #   {
+      #     "/" = search;
+      #     "?" = search;
+      #     ":" = {
+      #       mapping = helpers.mkRaw # lua
+      #         "cmp.mapping.preset.cmdline()";
+      #       sources = [{ name = "cmdline"; }];
+      #     };
+      #   };
 
       settings = {
         experimental = { ghost_text = true; };
