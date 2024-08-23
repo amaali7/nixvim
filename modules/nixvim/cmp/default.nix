@@ -5,21 +5,23 @@
     cmp = {
       enable = false;
 
-      cmdline = let
-        search = {
-          mapping = helpers.mkRaw # lua
-            "cmp.mapping.preset.cmdline()";
-          sources = [{ name = "buffer"; }];
-        };
-      in {
-        "/" = search;
-        "?" = search;
-        ":" = {
-          mapping = helpers.mkRaw # lua
-            "cmp.mapping.preset.cmdline()";
-          sources = [{ name = "cmdline"; }];
-        };
-      };
+			# cmdline =
+     	#   let
+     	#     search = {
+     	#       mapping = helpers.mkRaw # lua
+     	#         "cmp.mapping.preset.cmdline()";
+     	#       sources = [{ name = "buffer"; }];
+     	#     };
+     	#   in
+     	#   {
+     	#     "/" = search;
+     	#     "?" = search;
+     	#     ":" = {
+     	#       mapping = helpers.mkRaw # lua
+     	#         "cmp.mapping.preset.cmdline()";
+     	#       sources = [{ name = "cmdline"; }];
+     	#     };
+     	#   };
 
       settings = {
         experimental = { ghost_text = true; };
@@ -31,31 +33,31 @@
           "<C-e>" = "cmp.mapping.abort()";
           "<CR>" = helpers.mkRaw # lua
             ''
-							cmp.mapping({
-								i = function(fallback)
-									if cmp.visible() and cmp.get_active_entry() then
-										cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-									else
-										fallback()
-									end
-								end,
-								s = cmp.mapping.confirm({ select = true }),
-								c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-							})
-						'';
-				"<Tab>" = helpers.mkRaw # lua
-					''
-						cmp.mapping(function(fallback)
-							if cmp.visible() then
-              		cmp.select_next_item()
-              	elseif luasnip.locally_jumpable(1) then
-              		luasnip.jump(1)
-              	else
-              		fallback()
-              	end
-              end, { "i", "s" })
+              							cmp.mapping({
+              								i = function(fallback)
+              									if cmp.visible() and cmp.get_active_entry() then
+              										cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+              									else
+              										fallback()
+              									end
+              								end,
+              								s = cmp.mapping.confirm({ select = true }),
+              								c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+              							})
+              						'';
+          "<Tab>" = helpers.mkRaw # lua
+            ''
+              						cmp.mapping(function(fallback)
+              							if cmp.visible() then
+                            		cmp.select_next_item()
+                            	elseif luasnip.locally_jumpable(1) then
+                            		luasnip.jump(1)
+                            	else
+                            		fallback()
+                            	end
+                            end, { "i", "s" })
             '';
-           "<S-Tab>" = helpers.mkRaw # lua
+          "<S-Tab>" = helpers.mkRaw # lua
             ''
               cmp.mapping(function(fallback)
               	if cmp.visible() then
