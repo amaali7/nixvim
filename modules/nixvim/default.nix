@@ -1,8 +1,11 @@
 { pkgs, ... }:
 {
+  performance.byteCompileLua.enable = true;
   vimAlias = true;
   withNodeJs = true;
   withRuby = true;
+
+
 
   luaLoader.enable = true;
 
@@ -31,7 +34,7 @@
 
     signcolumn = "yes:1";
 
-		#mouse = "";
+    #mouse = "";
 
     foldcolumn = "0";
     foldlevel = 99;
