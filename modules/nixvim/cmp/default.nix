@@ -29,7 +29,8 @@
 				formatting = {fields = ["kind" "abbr" "menu"];
 					#	format = ''
 
-					#		'';};
+					#		'';
+				};
 
         mapping = {
           "<C-Space>" = "cmp.mapping.complete()";
