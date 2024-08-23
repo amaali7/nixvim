@@ -3,7 +3,18 @@
     {
       mode = [
         "n"
-        "v"
+      ];
+      action = "<cmd>LazyGit<cr>";
+      key = "<M-l>";
+      options = {
+        desc = "Open LazyGit";
+        silent = true;
+        noremap = true;
+      };
+    }
+    {
+      mode = [
+        "n"
       ];
       action = "<cmd>LazyGit<cr>";
       key = "<leader>gg";

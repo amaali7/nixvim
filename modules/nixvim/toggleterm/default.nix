@@ -37,6 +37,16 @@
         noremap = true;
       };
     }
+		{
+      mode = [ "n" ];
+      action = "<cmd>ToggleTerm<cr>";
+      key = "<M-t>";
+      options = {
+        desc = "ToggleTerm: Open Float";
+        silent = true;
+        noremap = true;
+      };
+    }
     {
       mode = [ "n" ];
       action = "<cmd>ToggleTerm direction=horizontal<cr>";
