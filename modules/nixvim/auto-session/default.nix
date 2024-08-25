@@ -14,11 +14,11 @@
       createEnabled = true;
       useGitBranch = true;
     };
-		#	extraOptions = {
-		#	e	__raw = ''
-		#	e		vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-		#	e	'';
-		#	e};
+			extraOptions = {
+				__raw = ''
+					vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+				'';
+			};
   };
 
   keymaps = [
