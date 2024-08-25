@@ -1,7 +1,7 @@
 { helpers, ... }: {
   plugins = {
     luasnip.enable = true;
-
+		cmp-dap.enable = true;
     cmp = {
       enable = true;
 
