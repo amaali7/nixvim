@@ -48,16 +48,16 @@
     };
   };
   plugins.crates-nvim.enable = true;
-  # extraPlugins = [
-  #   (pkgs.vimUtils.buildVimPlugin {
-  #     name = "ferris-nvim";
-  #     src = pkgs.fetchFromGitHub {
-  #       owner = "vxpm";
-  #       repo = "ferris.nvim";
-  #       rev = "b9cd307a4bb3de6d87fc5da26f0f2775f4e2873a";
-  #       hash = "sha256-iKCM8XStyYV1BKdx0OO1e1m9an8Ytr48D80ZgxS01CU=";
-  #     };
-  #   })
+   extraPlugins = [
+     (pkgs.vimUtils.buildVimPlugin {
+       name = "ferris-nvim";
+       src = pkgs.fetchFromGitHub {
+         owner = "vxpm";
+         repo = "ferris.nvim";
+         rev = "b9cd307a4bb3de6d87fc5da26f0f2775f4e2873a";
+         hash = "sha256-iKCM8XStyYV1BKdx0OO1e1m9an8Ytr48D80ZgxS01CU=";
+       };
+     })
   #   (pkgs.vimUtils.buildVimPlugin {
   #     name = "tree-climber-rust-nvim";
   #     src = pkgs.fetchFromGitHub {
@@ -67,7 +67,7 @@
   #       hash = "sha256-HDv8/52RZo/aAzcWxXfbYtPzzLRMwf+uhPRqz4I9Png=";
   #     };
   #   })
-  # ];
+  ];
 
   # extraConfigLua = ''require('my-plugin').setup({foo = "bar"})'';
 }
