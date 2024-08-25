@@ -1,6 +1,6 @@
 { helpers, ... }:
 {
-	colorschemes.oxocarbon.enable = true;
+  # colorschemes.oxocarbon.enable = true;
 	# extraConfigLuaPost = # lua
   #   ''
   #     do
@@ -13,13 +13,10 @@
   #     end
   #   '';
 
-  colorschemes.nord = {
+colorschemes.onedark = {
     enable = false;
     settings = {
-      borders = true;
-      contrast = false;
-      disable_background = false;
-      enable_sidebar_background = true;
+			style = "warmer";
     };
   };
 }

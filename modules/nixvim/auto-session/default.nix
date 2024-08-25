@@ -8,7 +8,7 @@
     ];
 
     autoRestore.enabled = false;
-    autoSave.enabled = true;
+    autoSave.enabled = false;
     autoSession = {
       enabled = true;
       createEnabled = true;
