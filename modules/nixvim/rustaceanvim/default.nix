@@ -69,5 +69,5 @@
     })
   ];
 
-  extraConfigLua = ''require('my-plugin').setup({foo = "bar"})'';
+	# extraConfigLua = ''require('my-plugin').setup({foo = "bar"})'';
 }
