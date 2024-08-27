@@ -49,7 +49,7 @@ in {
         K = "hover";
         gh = "hover";
         gD = "references";
-        # gd = "definition";
+        gd = "definition";
         gi = "implementation";
         gt = "type_definition";
       };
