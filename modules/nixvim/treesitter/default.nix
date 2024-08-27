@@ -2,8 +2,9 @@
   plugins = {
     treesitter = {
       enable = true;
-
-      indent = true;
+      settings = {
+        indent = true;
+      };
       folding = true;
       nixvimInjections = true;
     };
