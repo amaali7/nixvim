@@ -1,7 +1,7 @@
 { helpers, ... }: {
   plugins = {
     luasnip.enable = true;
-		cmp-dap.enable = true;
+    cmp-dap.enable = true;
     cmp = {
       enable = true;
 
@@ -50,21 +50,37 @@
         };
 
         sources = [
+
+          {
+            name = "nvim_lsp";
+            keyword_length = 2;
+            groupIndex = 1;
+            priority = 3;
+          }
           {
             name = "luasnip";
+            keyword_length = 2;
             groupIndex = 1;
             priority = 5;
           }
           {
-            name = "nvim_lsp";
-            groupIndex = 1;
-            priority = 3;
+            name = "path";
+            keyword_length = 2;
           }
-          { name = "omni"; }
-          { name = "path"; }
-          { name = "cmdline"; }
-          { name = "buffer"; }
-          { name = "dictionary"; }
+          {
+            name = "cmdline";
+
+            keyword_length = 2;
+          }
+          {
+            name = "buffer";
+            keyword_length = 2;
+          }
+          {
+            name = "dictionary";
+
+            keyword_length = 2;
+          }
         ];
       };
     };
