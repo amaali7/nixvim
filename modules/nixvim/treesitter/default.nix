@@ -3,7 +3,7 @@
     treesitter = {
       enable = true;
       settings = {
-        indent = true;
+        indent.enable = true;
       };
       folding = true;
       nixvimInjections = true;
