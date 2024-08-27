@@ -10,7 +10,10 @@
           search = {
             mapping = helpers.mkRaw # lua
               "cmp.mapping.preset.cmdline()";
-            sources = [{ name = "buffer"; }];
+            sources = [{
+              name = "buffer";
+              keyword_length = 2;
+            }];
           };
         in
         {
@@ -19,7 +22,10 @@
           ":" = {
             mapping = helpers.mkRaw # lua
               "cmp.mapping.preset.cmdline()";
-            sources = [{ name = "cmdline"; }];
+            sources = [{
+              name = "cmdline";
+              keyword_length = 2;
+            }];
           };
         };
 
