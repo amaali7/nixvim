@@ -4,31 +4,6 @@
     cmp-dap.enable = true;
     cmp = {
       enable = true;
-
-      cmdline =
-        let
-          search = {
-            mapping = helpers.mkRaw # lua
-              "cmp.mapping.preset.cmdline()";
-            sources = [{
-              name = "buffer";
-              keyword_length = 2;
-            }];
-          };
-        in
-        {
-          "/" = search;
-          "?" = search;
-          ":" = {
-            mapping = helpers.mkRaw # lua
-              "cmp.mapping.preset.cmdline()";
-            sources = [{
-              name = "cmdline";
-              keyword_length = 2;
-            }];
-          };
-        };
-
       settings = {
         experimental = { ghost_text = true; };
 
@@ -61,38 +36,34 @@
             name = "nvim_lsp";
             keyword_length = 2;
             groupIndex = 1;
-            priority = 3;
+            priority = 1;
           }
           {
             name = "luasnip";
             keyword_length = 2;
             groupIndex = 1;
-            priority = 5;
+            priority = 3;
           }
           {
             name = "path";
             keyword_length = 2;
+            priority = 4;
           }
           {
             name = "cmdline";
-
             keyword_length = 2;
+            priority = 5;
           }
           {
             name = "buffer";
             keyword_length = 2;
-          }
-          {
-            name = "dictionary";
-
-            keyword_length = 2;
+            priority = 2;
           }
         ];
       };
     };
 
     cmp-cmdline.enable = true;
-    cmp-dictionary.enable = true;
     cmp-fuzzy-path.enable = true;
     cmp-fuzzy-buffer.enable = true;
     cmp-nvim-lsp.enable = true;
